@@ -4,6 +4,7 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import GameDraw from "./sounds/game-draw.mp3";
 import GameFinished from "./sounds/game-finished.mp3";
+import clickSound from "./sounds/click-sound.mp3";
 function App() {
   const possibleResults = [
     [0, 1, 2],
@@ -31,14 +32,13 @@ function App() {
     setDisabledGame(false);
     setIsDraw(false);
   }
-  useEffect(()=>{
-    if (isGameFinished) {
-      let sound = new Audio(isDraw ? GameDraw : GameFinished);
-      sound.loop = false;
-      sound.play();
-    }
-    // eslint-disable-next-line
-  },[isGameFinished])
+
+  const playFinishedSound = (fromDraw) => {
+    const _isDraw = fromDraw || isDraw;
+    let sound = new Audio(_isDraw ? GameDraw : GameFinished);
+    sound.loop = false;
+    sound.play();
+  }
   useEffect(() => {
     if (_.keys(moves).length < 5) return;
     const winner = possibleResults.find((result) => {
@@ -46,11 +46,13 @@ function App() {
       return moves[a] && moves[a] === moves[b] && moves[a] === moves[c];
     });
     if (winner) {
+      playFinishedSound();
       setIsGameFinished(true);
       setWinningText(`${moves[winner[0]]} wins! 🎉`);
       setDisabledGame(true);
     } else {
       if (_.keys(moves).length === 9) {
+        playFinishedSound(true);
         setIsGameFinished(true);
         setIsDraw(true);
         setWinningText("It's a draw! 🤝");
@@ -80,6 +82,9 @@ function App() {
                 <button
                   onClick={() => {
                     if (moves[i]) return;
+                    let sound = new Audio(clickSound);
+                    sound.loop = false;
+                    sound.play();
                     setMoves((prev) => {
                       return {
                         ...prev,

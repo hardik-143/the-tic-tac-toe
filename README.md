@@ -2,15 +2,6 @@
 
 A classic Tic-Tac-Toe game built with React. This project demonstrates a simple implementation of the game, featuring sound effects and game state management.
 
-## Table of Contents
-
-- [The Tic-Tac-Toe](#the-tic-tac-toe)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [License](#license)
-
 ## Installation
 
 Follow these steps to set up the project locally:
@@ -24,3 +15,10 @@ cd the-tic-tac-toe
 
 # Install dependencies
 npm install
+```
+
+## Live
+
+You can play the game live at the following link:
+
+[Play Tic-Tac-Toe](https://t-tic-tac-toe.netlify.app/)

@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Russo+One&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Color Variables
+$background-dark: #1a1a1a;
+$container-dark: #2d2d2d;
+$accent-primary: #4ecdc4;
+$accent-secondary: #45b7b0;
+$accent-gradient-start: #ff6b6b;
+$text-light: #ffffff;
+$shadow-color: rgba(0, 0, 0, 0.3);
+$button-glow: rgba(78, 205, 196, 0.5);
+$button-bg: rgba(255, 255, 255, 0.1);
+$button-hover-bg: rgba(78, 205, 196, 0.2);
+$button-text-glow: rgba(78, 205, 196, 0.8);
+
+// Font Variables
+:root {
+  --game-font: "Press Start 2P", cursive;
+  --title-font: "Russo One", sans-serif;
+}
+
+body {
+  background: $background-dark;
+  color: $text-light;
+}
+
+h2 {
+  font-family: var(--title-font);
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px $shadow-color;
+  background: linear-gradient(45deg, $accent-gradient-start, $accent-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.text-dark {
+  color: $text-light;
+  font-family: var(--game-font);
+  font-size: 0.8rem;
+  text-shadow: 2px 2px 4px $shadow-color;
+}
+
+.border-dark {
+  border-color: $accent-primary;
+}
+
+button {
+  font-family: var(--game-font);
+  transition: all 0.3s ease;
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px $button-glow;
+  }
+}
+
+.grid {
+  button {
+    background: $button-bg;
+    font-size: 1.5rem;
+    backdrop-filter: blur(5px);
+    text-shadow: 0 0 10px $button-text-glow;
+
+    &:not(:disabled):hover {
+      background: $button-hover-bg;
+    }
+  }
+}
+
+[class*="bg-"] {
+  background: $container-dark;
+}

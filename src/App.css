@@ -1,11 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Russo+One&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-* {
-  font-family: "Prompt", sans-serif;
+:root {
+  --game-font: "Press Start 2P", cursive;
+  --title-font: "Russo One", sans-serif;
 }
+
+@layer components {
+  .game-text {
+    @apply font-['Press_Start_2P'] text-sm;
+  }
+
+  .title-text {
+    @apply font-['Russo_One'];
+  }
+
+  .game-button {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .game-button:not(:disabled):hover {
+    @apply transform scale-105 shadow-lg shadow-purple-500/30;
+  }
+}
+
 body {
-  background: #FFF8DC;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+h2 {
+  font-family: var(--title-font);
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.text-dark {
+  color: #ffffff;
+  font-family: var(--game-font);
+  font-size: 0.8rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.border-dark {
+  border-color: #4ecdc4;
+}
+
+button {
+  font-family: var(--game-font);
+  transition: all 0.3s ease;
+}
+
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
+}
+
+.grid button {
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 1.5rem;
+  backdrop-filter: blur(5px);
+  text-shadow: 0 0 10px rgba(78, 205, 196, 0.8);
+}
+
+.grid button:not(:disabled):hover {
+  background: rgba(78, 205, 196, 0.2);
+}
+
+[class*="bg-"] {
+  background: #2d2d2d;
 }

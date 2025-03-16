@@ -1,25 +1,56 @@
 import _ from "lodash";
 import clickSound from "../sounds/click-sound.mp3";
 import { useDispatch, useSelector } from "react-redux";
-import { makeMove } from "../store/gameSlice";
+import { makeMove, restartGame } from "../store/gameSlice";
+import GameStatus from "./GameStatus";
+import ButtonClick from "../sounds/buttons-click.mp3";
+
+/**
+ * Plays the button click sound
+ */
+const playButtonClick = () => {
+  const sound = new Audio(ButtonClick);
+  sound.volume = 0.3;
+  sound.play();
+};
 
 const GameBoard = () => {
   const dispatch = useDispatch();
-  const { moves, disabledGame } = useSelector((state) => state.game);
+  const {
+    moves,
+    currentMove,
+    isGameFinished,
+    isDraw,
+    winningText,
+    disabledGame,
+    player1Name,
+    player2Name,
+    isComputerMode,
+  } = useSelector((state) => state.game);
 
-  const handleClick = (i) => {
-    if (moves[i]) return;
+  const handleCellClick = (index) => {
+    if (moves[index] || isGameFinished || disabledGame) return;
     let sound = new Audio(clickSound);
     sound.loop = false;
     sound.play();
-    dispatch(makeMove({ index: i }));
+    dispatch(makeMove({ index }));
+  };
+
+  const handleRestart = () => {
+    playButtonClick();
+    dispatch(restartGame());
+  };
+
+  const handleBack = () => {
+    playButtonClick();
+    dispatch(restartGame({ resetMode: true }));
   };
 
   return (
     <div className="grid grid-cols-3 w-[210px] h-[210px] gap-3">
       {_.range(9).map((i) => (
         <button
-          onClick={() => handleClick(i)}
+          onClick={() => handleCellClick(i)}
           key={i}
           disabled={disabledGame}
           className={`text-dark inline-flex justify-center text-2xl items-center border border-dark select-none w-[62px] h-[62px] 

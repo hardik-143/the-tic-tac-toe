@@ -1,6 +1,26 @@
 import { useDispatch } from "react-redux";
 import { setGameMode } from "../store/gameSlice";
 import { useState } from "react";
+import ButtonClick from "../sounds/buttons-click.mp3";
+import KeyPress from "../sounds/key-press.mp3";
+
+/**
+ * Plays the button click sound
+ */
+const playButtonClick = () => {
+  const sound = new Audio(ButtonClick);
+  sound.volume = 0.3;
+  sound.play();
+};
+
+/**
+ * Plays the key press sound
+ */
+const playKeyPress = () => {
+  const sound = new Audio(KeyPress);
+  sound.volume = 0.2;
+  sound.play();
+};
 
 /**
  * Component for selecting game mode (vs Computer or 2 Players)
@@ -13,7 +33,13 @@ const GameModeSelector = () => {
   const [player2Name, setPlayer2Name] = useState("");
   const [showNameInput, setShowNameInput] = useState(false);
 
+  const handleInputChange = (e, setter) => {
+    playKeyPress();
+    setter(e.target.value);
+  };
+
   const handleModeSelect = (isComputerMode) => {
+    playButtonClick();
     setGameMode(isComputerMode);
     setShowNameInput(true);
     setShowDifficulty(false);
@@ -32,6 +58,7 @@ const GameModeSelector = () => {
       }
     }
 
+    playButtonClick();
     try {
       dispatch({
         type: "game/setGameMode",
@@ -49,11 +76,13 @@ const GameModeSelector = () => {
 
   const handleNextInComputerMode = () => {
     if (!player1Name) return;
+    playButtonClick();
     setShowDifficulty(true);
     setShowNameInput(false);
   };
 
   const handleBack = () => {
+    playButtonClick();
     if (showDifficulty) {
       setShowDifficulty(false);
       setShowNameInput(true);
@@ -74,7 +103,7 @@ const GameModeSelector = () => {
         type="text"
         placeholder="Player 1 Name (X)"
         value={player1Name}
-        onChange={(e) => setPlayer1Name(e.target.value)}
+        onChange={(e) => handleInputChange(e, setPlayer1Name)}
         className="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-purple-500 focus:outline-none font-['Press_Start_2P'] text-sm w-64"
         maxLength={20}
       />
@@ -83,7 +112,7 @@ const GameModeSelector = () => {
           type="text"
           placeholder="Player 2 Name (O)"
           value={player2Name}
-          onChange={(e) => setPlayer2Name(e.target.value)}
+          onChange={(e) => handleInputChange(e, setPlayer2Name)}
           className="px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-purple-500 focus:outline-none font-['Press_Start_2P'] text-sm w-64"
           maxLength={20}
         />

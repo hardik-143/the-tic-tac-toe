@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { setGameMode } from "../store/gameSlice";
 import { useState } from "react";
 import ButtonClick from "../sounds/buttons-click.mp3";
 import KeyPress from "../sounds/key-press.mp3";

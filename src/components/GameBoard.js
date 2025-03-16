@@ -1,17 +1,11 @@
 import _ from "lodash";
 import clickSound from "../sounds/click-sound.mp3";
 import { useDispatch, useSelector } from "react-redux";
-import { makeMove, restartGame } from "../store/gameSlice";
-import ButtonClick from "../sounds/buttons-click.mp3";
+import { makeMove } from "../store/gameSlice";
 
 /**
  * Plays the button click sound
  */
-const playButtonClick = () => {
-  const sound = new Audio(ButtonClick);
-  sound.volume = 0.3;
-  sound.play();
-};
 
 const GameBoard = () => {
   const dispatch = useDispatch();
@@ -25,15 +19,6 @@ const GameBoard = () => {
     dispatch(makeMove({ index }));
   };
 
-  const handleRestart = () => {
-    playButtonClick();
-    dispatch(restartGame());
-  };
-
-  const handleBack = () => {
-    playButtonClick();
-    dispatch(restartGame({ resetMode: true }));
-  };
 
   return (
     <div className="grid grid-cols-3 w-[210px] h-[210px] gap-3">

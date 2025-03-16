@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import ButtonClick from "../sounds/buttons-click.mp3";
 import KeyPress from "../sounds/key-press.mp3";
+import { Link } from "react-router-dom";
 
 /**
  * Plays the button click sound
@@ -205,6 +206,14 @@ const GameModeSelector = () => {
         >
           2 Players
         </button>
+      </div>
+      <div className="mt-4">
+        <Link
+          to="/how-to-play"
+          className="text-gray-400 hover:text-white transition-colors duration-300 font-['Press_Start_2P'] text-xs"
+        >
+          How to Play
+        </Link>
       </div>
     </div>
   );

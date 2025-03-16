@@ -2,7 +2,6 @@ import _ from "lodash";
 import clickSound from "../sounds/click-sound.mp3";
 import { useDispatch, useSelector } from "react-redux";
 import { makeMove, restartGame } from "../store/gameSlice";
-import GameStatus from "./GameStatus";
 import ButtonClick from "../sounds/buttons-click.mp3";
 
 /**
@@ -16,20 +15,10 @@ const playButtonClick = () => {
 
 const GameBoard = () => {
   const dispatch = useDispatch();
-  const {
-    moves,
-    currentMove,
-    isGameFinished,
-    isDraw,
-    winningText,
-    disabledGame,
-    player1Name,
-    player2Name,
-    isComputerMode,
-  } = useSelector((state) => state.game);
+  const { moves, disabledGame } = useSelector((state) => state.game);
 
   const handleCellClick = (index) => {
-    if (moves[index] || isGameFinished || disabledGame) return;
+    if (moves[index] || disabledGame) return;
     let sound = new Audio(clickSound);
     sound.loop = false;
     sound.play();

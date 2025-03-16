@@ -1,19 +1,3 @@
-// export const POSSIBLE_RESULTS = [
-//   [0, 1, 2],
-//   [3, 4, 5],
-//   [6, 7, 8],
-//   [0, 3, 6],
-//   [1, 4, 7],
-//   [2, 5, 8],
-//   [0, 4, 8],
-//   [2, 4, 6],
-// ];
-
-// export const PLAYER_NAME = {
-//   0: "X",
-//   1: "O",
-// };
-
 /**
  * All possible winning combinations in Tic Tac Toe
  * Each array represents the indices of cells that form a winning line
@@ -54,7 +38,11 @@ export const ALL_POSSIBLE_MOVES = [
  * - importance: Description of why this position is important
  */
 export const STRATEGIC_POSITIONS = [
-  { position: 4, importance: "Center - Most important position, part of 4 winning combinations" },
+  {
+    position: 4,
+    importance:
+      "Center - Most important position, part of 4 winning combinations",
+  },
   { position: 0, importance: "Corner - Part of 3 winning combinations" },
   { position: 2, importance: "Corner - Part of 3 winning combinations" },
   { position: 6, importance: "Corner - Part of 3 winning combinations" },
